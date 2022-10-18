@@ -24,11 +24,16 @@ const TodoApp_zinu = () => {
                 done: false,
             })
         );
-        nextId.CURRENT += 1;
-    });
+        nextId.Current += 1;
+    },[todos]);
+    const onToggle = useCallback(id => {
+        setTodos(
+            todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo)
+        );
+    }, [todos]);
     return <div>
         <TodoForm onInsert={onInsert}/>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} onToggle={onToggle}/>
     </div>;
 };
 
